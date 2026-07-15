@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html, body { height: 100%; background: #050407; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+}
+
+.noise::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  opacity: .16;
+}
+
+::selection { background: rgba(244, 208, 122, 0.22); }
+@layer components {
+  /* lift motion */
+  .lift {
+    @apply transition-transform duration-200 ease-out will-change-transform;
+    @apply hover:-translate-y-1;
+  }
+
+  /* red gradient glow OUTSIDE on hover (works on panels/buttons) */
+  .lift-glow {
+    position: relative;
+    isolation: isolate; /* keeps glow behind correctly */
+  }
+
+  .lift-glow::after {
+    content: "";
+    position: absolute;
+    inset: -10px;                 /* outside */
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 180ms ease-out;
+    background: linear-gradient(
+      135deg,
+      rgba(176, 38, 46, 0.40),     /* blood */
+      rgba(255, 122, 61, 0.28),    /* ember */
+      rgba(244, 208, 122, 0.18)    /* gild */
+    );
+    filter: blur(18px);
+  }
+
+  .lift-glow:hover::after {
+    opacity: 1;
+  }
+}
