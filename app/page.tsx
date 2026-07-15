@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { ReactNode } from "react";
 import { Navbar } from "@/components/Navbar";
 import { ScrollRail } from "@/components/ScrollRail";
@@ -37,99 +36,84 @@ function Section({
 export default function Page() {
   return (
     <div className="min-h-screen bg-ink">
+      {/* Fixed navbar layered above hero */}
       <Navbar />
       <ScrollRail />
 
-      {/* LANDING (first screen) */}
-      <section className="relative pt-28 pb-10">
-        {/* page ambience behind the banner */}
+      {/* FULL-VH LANDING HERO (full width, not inside a container) */}
+      <section className="relative min-h-[100svh] w-full pt-28">
+        {/* background ambience behind everything */}
         <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-ink" />
-          <div className="absolute inset-0 bg-[radial-gradient(55%_45%_at_50%_15%,rgba(244,208,122,0.10),transparent_70%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(40%_40%_at_75%_25%,rgba(255,122,61,0.10),transparent_72%)]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/45 to-ink" />
+          <div className="absolute inset-0 bg-[radial-gradient(55%_45%_at_25%_35%,rgba(255,122,61,0.10),transparent_65%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(45%_45%_at_80%_30%,rgba(244,208,122,0.08),transparent_70%)]" />
         </div>
 
-        <div className="mx-auto max-w-6xl px-4">
-          {/* Banner frame (sketch-like landing) */}
-          <div className="lift lift-glow relative overflow-hidden rounded-[28px] border border-stroke bg-white/5 backdrop-blur-2xl">
-            {/* watercolor/banner background */}
-            <div
-              className="absolute inset-0 opacity-[0.55] bg-[url('/landing-bg.jpg')] bg-cover bg-center"
-              aria-hidden
-            />
-            {/* readability overlays (don’t kill the art) */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/15" />
-            <div className="absolute inset-0 bg-[radial-gradient(70%_70%_at_20%_40%,rgba(0,0,0,0.55),transparent_55%)]" />
-            {/* subtle gold rim glow */}
-            <div className="absolute -inset-24 bg-[radial-gradient(circle,rgba(244,208,122,0.10),transparent_55%)] blur-2xl" />
+        <div className="grid min-h-[calc(100svh-7rem)] grid-cols-1 items-center gap-10 px-6 pb-12 lg:grid-cols-2 lg:gap-14 lg:px-14">
+          {/* LEFT: VIDEO HERO */}
+          <div className="relative">
+            <div className="lift lift-glow relative overflow-hidden rounded-3xl border border-stroke bg-black/20">
+              {/* subtle glossy overlay */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/45 via-transparent to-white/5" />
 
-            <div className="relative grid gap-10 px-6 py-10 md:grid-cols-12 md:px-10 md:py-14">
-              {/* Left content */}
-              <div className="md:col-span-7">
-                <div className="inline-flex items-center gap-2 rounded-full border border-stroke bg-black/25 px-3 py-1 text-xs text-white/70 backdrop-blur-xl">
-                  University Exhibition • Scratch 3.0
-                </div>
+              <video
+                className="block h-[52vh] w-full object-cover md:h-[60vh] lg:h-[72vh]"
+                src="/assets/kai.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="auto"
+              />
 
-                <h1 className="mt-5 text-4xl md:text-6xl font-extrabold leading-[0.95] tracking-tight">
-                  ATHERFALL <br />
-                  <span className="text-white/90">— Hunt, Return, Ascend</span>
-                </h1>
-
-                <p className="mt-5 max-w-xl text-sm md:text-base text-white/75">
-                  AtherFall is a top-down medieval hunting RPG built in Scratch.
-                  Take missions at camp, stalk animals across biomes, strike from behind,
-                  and unlock the abyss arena boss fight.
-                </p>
-
-                <div className="mt-7 flex flex-wrap gap-3">
-                  <a
-                    href="#play"
-                    className="lift lift-glow rounded-xl bg-gradient-to-b from-gild/25 to-ember/10 px-5 py-3 text-sm font-semibold border border-stroke hover:from-gild/30 hover:to-ember/15 transition shadow-gild"
-                  >
-                    Try the Demo
-                  </a>
-                  <a
-                    href="#overview"
-                    className="lift lift-glow rounded-xl px-5 py-3 text-sm font-semibold border border-stroke bg-black/25 hover:bg-white/5 transition backdrop-blur-xl"
-                  >
-                    Read Docs
-                  </a>
-                </div>
-
-                <a
-                  href="#overview"
-                  className="mt-10 inline-flex items-center gap-2 text-xs text-white/60 hover:text-white/80 transition"
-                >
-                  <ArrowDown className="h-4 w-4" />
-                  Scroll to documentation
-                </a>
-              </div>
-
-              {/* Right: character cutout */}
-              <div className="md:col-span-5 relative">
-                <div className="relative h-[340px] md:h-[420px] w-full">
-                  {/* glow behind character */}
-                  <div className="absolute left-1/2 top-1/2 h-[260px] w-[260px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-ember/10 blur-[60px]" />
-                  <div className="absolute left-[58%] top-[40%] h-[220px] w-[220px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gild/10 blur-[70px]" />
-
-                  <Image
-                    src="/character.svg"
-                    alt="AtherFall Character"
-                    fill
-                    priority
-                    className="object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.70)]"
-                  />
-                </div>
-
-                {/* Quick specs overlay card (optional) */}
-                
-              </div>
+              {/* vignette to make it cinematic */}
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_70%_at_50%_40%,transparent_45%,rgba(0,0,0,0.65))]" />
             </div>
+
+           
+          </div>
+
+          {/* RIGHT: TITLE + SUBTITLE */}
+          <div className="relative">
+            
+
+            <h1 className="mt-5 text-4xl md:text-6xl font-extrabold leading-[0.95] tracking-tight">
+              Aetherfall: <br />
+              Echoes of The Sundering
+            </h1>
+
+            <p className="mt-5 max-w-xl text-sm md:text-base text-white/75">
+              A world-ending event that happened long ago. The truth was broken into pieces.
+              Now someone is putting the memory back together.
+            </p>
+
+            <div className="mt-7 flex flex-wrap gap-3">
+              <a
+                href="#play"
+                className="lift lift-glow rounded-xl bg-gradient-to-b from-gild/25 to-ember/10 px-5 py-3 text-sm font-semibold border border-stroke hover:from-gild/30 hover:to-ember/15 transition shadow-gild"
+              >
+                Play / Demo
+              </a>
+              <a
+                href="#overview"
+                className="lift lift-glow rounded-xl px-5 py-3 text-sm font-semibold border border-stroke bg-black/25 hover:bg-white/5 transition backdrop-blur-xl"
+              >
+                Read Docs
+              </a>
+            </div>
+
+            <a
+              href="#overview"
+              className="mt-10 inline-flex items-center gap-2 text-xs text-white/55 hover:text-white/80 transition"
+            >
+              <ArrowDown className="h-4 w-4" />
+              Scroll to documentation
+            </a>
           </div>
         </div>
       </section>
 
-      {/* DOCS CONTENT (revealed on scroll) */}
+      {/* DOCS BELOW (exposed on scroll) */}
       <main className="mx-auto max-w-6xl px-4 pb-24">
         <div className="grid gap-6">
           <Section id="overview" title="Overview" icon={<Map className="h-5 w-5 text-gild/90" />}>
@@ -146,11 +130,7 @@ export default function Page() {
             </ul>
           </Section>
 
-          <Section
-            id="gameplay"
-            title="Core Gameplay Loop"
-            icon={<Footprints className="h-5 w-5 text-gild/90" />}
-          >
+          <Section id="gameplay" title="Core Gameplay Loop" icon={<Footprints className="h-5 w-5 text-gild/90" />}>
             <ol className="list-decimal pl-5 space-y-2">
               <li>Start at Base Camp</li>
               <li>Talk to quest NPC → receive hunt mission</li>
@@ -181,24 +161,12 @@ export default function Page() {
             </div>
           </Section>
 
-          <Section
-            id="mechanics"
-            title="Key Mechanics"
-            icon={<Crosshair className="h-5 w-5 text-gild/90" />}
-          >
+          <Section id="mechanics" title="Key Mechanics" icon={<Crosshair className="h-5 w-5 text-gild/90" />}>
             <ul className="list-disc pl-5 space-y-2">
-              <li>
-                <span className="text-white">Camera:</span> player centered, world offsets with camX/camY.
-              </li>
-              <li>
-                <span className="text-white">Dialogue:</span> pixel font rendering, multi-page, Enter to advance.
-              </li>
-              <li>
-                <span className="text-white">Missions:</span> progress tracking (0/3 etc.), portal unlock after enough missions.
-              </li>
-              <li>
-                <span className="text-white">Hunting:</span> strike from behind; danger if the target turns to face you.
-              </li>
+              <li><span className="text-white">Camera:</span> player centered, world offsets with camX/camY.</li>
+              <li><span className="text-white">Dialogue:</span> pixel font rendering, multi-page, Enter to advance.</li>
+              <li><span className="text-white">Missions:</span> progress tracking (0/3 etc.), portal unlock after enough missions.</li>
+              <li><span className="text-white">Hunting:</span> strike from behind; danger if the target turns to face you.</li>
             </ul>
           </Section>
 
@@ -219,7 +187,7 @@ export default function Page() {
           </Section>
 
           <Section id="play" title="Play / Demo Embed">
-            <p className="mb-3">Embed your Scratch project here (replace the project ID).</p>
+            
             <div className="lift lift-glow aspect-video w-full overflow-hidden rounded-xl border border-stroke bg-black/30">
               <iframe
                 className="h-full w-full"
@@ -231,7 +199,7 @@ export default function Page() {
         </div>
 
         <footer className="mt-10 text-center text-xs text-white/45">
-          © {new Date().getFullYear()} AtherFall — Medieval Scratch RPG Docs
+          © {new Date().getFullYear()} Aetherfall — Docs
         </footer>
       </main>
     </div>
