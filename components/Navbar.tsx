@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { OrnatePanel } from "./OrnatePanel";
-import  logo  from "@/public/assets/logo.jpeg";
+import  logo  from "@/public/assets/NewLogo.jpeg";
 
 const nav = [
   { label: "Overview", href: "#overview" },
