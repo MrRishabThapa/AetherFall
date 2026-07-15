@@ -2,7 +2,7 @@ import "./globals.css";
 import { bodyFont, headingFont } from "./fonts";
 
 export const metadata = {
-  title: "AtherFall — Medieval Game Docs",
+  title: "AetherFall — Medieval Game Docs",
   description: "Single-page docs & showcase for our Scratch RPG",
 };
 
