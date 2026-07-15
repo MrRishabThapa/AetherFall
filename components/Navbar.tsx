@@ -22,7 +22,7 @@ export function Navbar() {
             <img src={logo.src} alt="AtherFall Logo" className="h-12 w-12 rounded-full" />
             <div className="leading-tight">
               <div className="text-sm font-semibold tracking-[0.18em] font-heading">
-                ATHERFALL
+                AETHERFALL
               </div>
               <div className="text-xs text-white/60">Medieval Scratch RPG Docs</div>
             </div>
