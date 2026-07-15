@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { OrnatePanel } from "./OrnatePanel";
+import  logo  from "@/public/assets/logo.jpeg";
 
 const nav = [
   { label: "Overview", href: "#overview" },
@@ -18,7 +19,7 @@ export function Navbar() {
       <div className="mx-auto max-w-6xl px-4 pt-4">
         <OrnatePanel className="flex items-center justify-between px-4 py-3">
           <div className="flex items-center gap-3">
-            <div className="h-9 w-9 rounded-xl border border-stroke bg-black/30 shadow-gild" />
+            <img src={logo.src} alt="AtherFall Logo" className="h-12 w-12 rounded-full" />
             <div className="leading-tight">
               <div className="text-sm font-semibold tracking-[0.18em] font-heading">
                 ATHERFALL

@@ -7,6 +7,7 @@ import { BackgroundScene } from "@/components/BackgroundScene";
 import { Embers } from "@/components/Embers";
 import { Crosshair, Footprints, Map, Swords, Users } from "lucide-react";
 
+
 function Section({
   id,
   title,
@@ -23,7 +24,7 @@ function Section({
       <OrnatePanel className="p-6 md:p-8">
         <div className="flex items-center gap-3">
           <div className="grid h-10 w-10 place-items-center rounded-xl border border-stroke bg-black/20">
-            {icon}
+           {icon}
           </div>
           <h2 className="text-xl md:text-2xl font-semibold tracking-tight">
             {title}
