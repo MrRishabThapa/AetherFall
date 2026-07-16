@@ -1,14 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { X, Play } from "lucide-react";
+import { X } from "lucide-react";
+import { AutoPlayOnViewVideo } from "@/components/AutoPlayOnViewVideo";
 
 export type ProcessItem = {
   type: "image" | "video";
-  src: string;          // "/process/xx.jpg" OR "/process/xx.mp4"
-  poster?: string;      // for video previews (recommended)
+  src: string; // "/process/xx.jpg" OR "/process/xx.mp4"
+  poster?: string; // recommended for video first frame
   title?: string;
   note?: string;
 };
@@ -26,42 +27,25 @@ function PreviewMedia({ item }: { item: ProcessItem }) {
     );
   }
 
-  // Video preview: use poster if available
-  if (item.poster) {
-    return (
-      <>
-        <Image
-          src={item.poster}
-          alt={item.title ?? "Process video"}
-          fill
-          className="object-cover"
-          sizes="(max-width: 640px) 100vw, 33vw"
-        />
-        <div className="absolute inset-0 grid place-items-center">
-          <div className="grid h-10 w-10 place-items-center rounded-full bg-black/65 border border-white/15">
-            <Play className="h-4 w-4 text-white/90" />
-          </div>
-        </div>
-      </>
-    );
-  }
-
-  // Fallback if no poster (still works, but heavier)
+  // IMPORTANT: render an actual video so it can autoplay on scroll
   return (
-    <>
-      <video className="h-full w-full object-cover" muted playsInline preload="metadata">
-        <source src={item.src} type="video/mp4" />
-      </video>
-      <div className="absolute inset-0 grid place-items-center">
-        <div className="grid h-10 w-10 place-items-center rounded-full bg-black/65 border border-white/15">
-          <Play className="h-4 w-4 text-white/90" />
-        </div>
-      </div>
-    </>
+    <AutoPlayOnViewVideo
+      src={item.src}
+      poster={item.poster}
+      className="h-full w-full object-cover"
+      controls={false}
+      threshold={0.35}
+    />
   );
 }
 
-function ModalMedia({ item }: { item: ProcessItem }) {
+function ModalMedia({
+  item,
+  modalRoot,
+}: {
+  item: ProcessItem;
+  modalRoot: HTMLElement | null;
+}) {
   if (item.type === "image") {
     return (
       <div className="relative aspect-[16/10] w-full">
@@ -76,18 +60,33 @@ function ModalMedia({ item }: { item: ProcessItem }) {
     );
   }
 
+  // Modal videos: autoplay/pause based on visibility INSIDE the modal scroll container
   return (
     <div className="relative aspect-[16/10] w-full bg-black">
-      <video className="h-full w-full object-cover" controls playsInline preload="metadata">
-        <source src={item.src} type="video/mp4" />
-      </video>
+      <AutoPlayOnViewVideo
+        src={item.src}
+        poster={item.poster}
+        root={modalRoot}
+        className="h-full w-full object-cover"
+        controls={true}
+        threshold={0.35}
+      />
     </div>
   );
 }
 
-export function ProcessGallery({ items, previewCount = 3 }: { items: ProcessItem[]; previewCount?: number }) {
+export function ProcessGallery({
+  items,
+  previewCount = 3,
+}: {
+  items: ProcessItem[];
+  previewCount?: number;
+}) {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+
+  // This is the scroll container inside the modal
+  const modalScrollRef = useRef<HTMLDivElement>(null);
 
   const preview = useMemo(
     () => items.slice(0, Math.min(previewCount, items.length)),
@@ -96,6 +95,7 @@ export function ProcessGallery({ items, previewCount = 3 }: { items: ProcessItem
 
   useEffect(() => setMounted(true), []);
 
+  // ESC to close + lock body scroll when open
   useEffect(() => {
     if (!open) return;
 
@@ -118,12 +118,27 @@ export function ProcessGallery({ items, previewCount = 3 }: { items: ProcessItem
       {/* Preview: exactly 3 items, no horizontal scroll */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         {preview.map((it, idx) => (
-          <div key={it.src + idx} className="lift lift-glow overflow-hidden rounded-xl border border-stroke bg-black/20">
+          <div
+            key={it.src + idx}
+            className="lift lift-glow overflow-hidden rounded-xl border border-stroke bg-black/20"
+          >
             <div className="relative aspect-[16/10] w-full">
               <PreviewMedia item={it} />
+
+              {/* dark fade for text */}
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0" />
+
+              {/* small VIDEO badge */}
+              {it.type === "video" ? (
+                <div className="absolute left-2 top-2 rounded-full border border-white/15 bg-black/55 px-2 py-1 text-[10px] text-white/80">
+                  VIDEO
+                </div>
+              ) : null}
+
               {it.title ? (
-                <div className="absolute bottom-2 left-2 right-2 text-[11px] text-white/85">{it.title}</div>
+                <div className="absolute bottom-2 left-2 right-2 text-[11px] text-white/85">
+                  {it.title}
+                </div>
               ) : null}
             </div>
           </div>
@@ -147,13 +162,23 @@ export function ProcessGallery({ items, previewCount = 3 }: { items: ProcessItem
       {mounted && open
         ? createPortal(
             <div className="fixed inset-0 z-[9999]">
-              <div className="absolute inset-0 bg-black" onClick={() => setOpen(false)} />
+              {/* solid backdrop */}
+              <div
+                className="absolute inset-0 bg-black"
+                onClick={() => setOpen(false)}
+              />
 
-              <div className="relative mx-auto mt-20 w-[min(1100px,92vw)]">
+              {/* modal panel (stop clicks from closing when interacting) */}
+              <div
+                className="relative mx-auto mt-20 w-[min(1100px,92vw)]"
+                onClick={(e) => e.stopPropagation()}
+              >
                 <div className="overflow-hidden rounded-2xl border border-stroke bg-[#050407] shadow-[0_20px_80px_rgba(0,0,0,0.85)]">
                   <div className="flex items-start justify-between gap-4 border-b border-stroke px-4 py-3">
                     <div>
-                      <div className="text-sm font-semibold text-white">Process / Development Journey</div>
+                      <div className="text-sm font-semibold text-white">
+                        Process / Development Journey
+                      </div>
                       <div className="text-xs text-white/55">
                         Mixed media proof: screenshots + prototype videos.
                       </div>
@@ -168,15 +193,31 @@ export function ProcessGallery({ items, previewCount = 3 }: { items: ProcessItem
                     </button>
                   </div>
 
-                  <div className="max-h-[72vh] overflow-y-auto p-4">
+                  {/* This is the modal scroll container (important for autoplay-on-scroll inside modal) */}
+                  <div
+                    ref={modalScrollRef}
+                    className="max-h-[72vh] overflow-y-auto p-4"
+                  >
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                       {items.map((it, idx) => (
-                        <div key={it.src + idx} className="lift lift-glow overflow-hidden rounded-xl border border-stroke bg-black/20">
-                          <ModalMedia item={it} />
+                        <div
+                          key={it.src + idx}
+                          className="lift lift-glow overflow-hidden rounded-xl border border-stroke bg-black/20"
+                        >
+                          <ModalMedia item={it} modalRoot={modalScrollRef.current} />
+
                           {(it.title || it.note) ? (
                             <div className="p-3">
-                              {it.title ? <div className="text-sm font-semibold text-white/85">{it.title}</div> : null}
-                              {it.note ? <div className="mt-1 text-xs text-white/55 leading-relaxed">{it.note}</div> : null}
+                              {it.title ? (
+                                <div className="text-sm font-semibold text-white/85">
+                                  {it.title}
+                                </div>
+                              ) : null}
+                              {it.note ? (
+                                <div className="mt-1 text-xs text-white/55 leading-relaxed">
+                                  {it.note}
+                                </div>
+                              ) : null}
                             </div>
                           ) : null}
                         </div>

@@ -11,7 +11,9 @@ const nav = [
   { label: "Mechanics", href: "#mechanics" },
   { label: "Boss", href: "#boss" },
   { label: "Process", href: "#process" },
-  { label: "Team", href: "#team" },
+   { label: "Team", href: "#team" },
+  { label: "Credits", href: "#credits" },
+ 
 ];
 
 export function Navbar() {
