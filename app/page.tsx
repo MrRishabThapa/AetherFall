@@ -493,7 +493,7 @@ export default function Page() {
             <div className="lift lift-glow aspect-video w-full overflow-hidden rounded-xl border border-stroke bg-black/30">
               <iframe
                 className="h-full w-full"
-                src="https://scratch.mit.edu/projects/1350217502/embed"
+                src="https://scratch.mit.edu/projects/1362631682/embed"
                 allowFullScreen
               />
             </div>
