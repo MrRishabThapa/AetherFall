@@ -295,16 +295,16 @@ export default function Page() {
                 enemies
               </li>
               <li>
-                Forest Boss : Dryad , very energetic, spins a lot , butterfly
+                Forest Boss : Dryad ; very energetic, spins a lot , butterfly
                 kicks
               </li>
               <li>
-                Artic Boss : Prime Ape , Strong Bulky , moves slowly but has
+                Artic Boss : Prime Ape ; Strong Bulky , moves slowly but has
                 high health and attack damage
               </li>
 
               <li>
-                Desert Boss : Corpse , Slithery , moves quickly and has high
+                Desert Boss : Corpse ; Slithery , moves quickly and has high
                 attack speed
               </li>
             </ul>
@@ -337,7 +337,7 @@ export default function Page() {
         // TOP ROW (2 cards centered)
         {
           name: "Rishab",
-          title: "Captain / Integration",
+          title: "Game Logic / Integration",
           work: "Core integration, camera/overworld logic, missions integration, final build.",
           img: "/team/Rishab.jpeg",
           grid: "lg:col-start-2 lg:col-span-2",
@@ -345,7 +345,7 @@ export default function Page() {
         },
         {
           name: "Anup",
-          title: "AI / Boss Systems",
+          title: "Enemy AI / Boss Systems",
           work: "Boss behaviour, creature patterns, combat logic and tuning.",
           img: "/team/Anup.jpeg",
           grid: "lg:col-start-4 lg:col-span-2",
