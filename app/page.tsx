@@ -48,17 +48,25 @@ function Section({
   );
 }
 const processItems: ProcessItem[] = [
-  { type: "image", src: "/process/logo-design.jpeg", title: "Early Logo Design" },
+  {
+    type: "image",
+    src: "/process/logo-design.jpeg",
+    title: "Early Logo Design",
+  },
   {
     type: "video",
     src: "/process/initial.mp4",
     poster: "/process/02-camera-poster.jpg",
     title: "Camera Prototype (video)",
   },
-  
+
   { type: "image", src: "/process/story.png", title: "Game UI concept" },
-  
-  { type: "image", src: "/process/character-custom-design.png", title: "Custom Character Design" },
+
+  {
+    type: "image",
+    src: "/process/character-custom-design.png",
+    title: "Custom Character Design",
+  },
   {
     type: "video",
     src: "/process/Design.mp4",
@@ -73,8 +81,8 @@ type TeamMember = {
   title: string;
   work: string;
   img: string;
-  grid: string;      // controls placement in the 6-col grid
-  imgPos?: string;   // optional: object-position tweak per photo
+  grid: string; // controls placement in the 6-col grid
+  imgPos?: string; // optional: object-position tweak per photo
 };
 
 function TeamCard({ m }: { m: TeamMember }) {
@@ -295,16 +303,16 @@ export default function Page() {
                 enemies
               </li>
               <li>
-                Forest Boss : Dryad ; very energetic, spins a lot , butterfly
+                Forest Boss : <b>DRYAD</b> ; very energetic, spins a lot , butterfly
                 kicks
               </li>
               <li>
-                Artic Boss : Prime Ape ; Strong Bulky , moves slowly but has
+                Artic Boss : <b>PRIME APE</b> ; Strong Bulky , moves slowly but has
                 high health and attack damage
               </li>
 
               <li>
-                Desert Boss : Corpse ; Slithery , moves quickly and has high
+                Desert Boss : <b>CORPSE</b> ; Slithery , moves quickly and has high
                 attack speed
               </li>
             </ul>
@@ -329,60 +337,64 @@ export default function Page() {
 
             <ProcessGallery items={processItems} previewCount={3} />
           </Section>
-          <Section id="team" title="Team" icon={<Users className="h-5 w-5 text-gild/90" />}>
-  <div className="mt-6">
-    {/* 6-col grid on large screens */}
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-6">
-      {[
-        // TOP ROW (2 cards centered)
-        {
-          name: "Rishab",
-          title: "Game Logic / Integration",
-          work: "Core integration, camera/overworld logic, missions integration, final build.",
-          img: "/team/Rishab.jpeg",
-          grid: "lg:col-start-2 lg:col-span-2",
-          imgPos: "object-[center_15%]",
-        },
-        {
-          name: "Anup",
-          title: "Enemy AI / Boss Systems",
-          work: "Boss behaviour, creature patterns, combat logic and tuning.",
-          img: "/team/Anup.jpeg",
-          grid: "lg:col-start-4 lg:col-span-2",
-          imgPos: "object-[center_15%]",
-        },
+          <Section
+            id="team"
+            title="Team"
+            icon={<Users className="h-5 w-5 text-gild/90" />}
+          >
+            <div className="mt-6">
+              {/* 6-col grid on large screens */}
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-6">
+                {[
+                  // TOP ROW (2 cards centered)
+                  {
+                    name: "Rishab",
+                    title: "Game Logic / Integration",
+                    work: "Core integration, camera/overworld logic, missions integration, final build.",
+                    img: "/team/Rishab.jpeg",
+                    grid: "lg:col-start-2 lg:col-span-2",
+                    imgPos: "object-[center_15%]",
+                  },
+                  {
+                    name: "Anup",
+                    title: "Enemy AI / Boss Systems",
+                    work: "Boss behaviour, creature patterns, combat logic and tuning.",
+                    img: "/team/Anup.jpeg",
+                    grid: "lg:col-start-4 lg:col-span-2",
+                    imgPos: "object-[center_15%]",
+                  },
 
-        // BOTTOM ROW (3 cards evenly spaced)
-        {
-          name: "Roshni",
-          title: "Art / UI",
-          work: "Biome/map art, UI assets, dialogue visuals, polish pass.",
-          img: "/team/roshni.jpeg",
-          grid: "lg:col-start-1 lg:col-span-2",
-          imgPos: "object-[center_20%]",
-        },
-        {
-          name: "Vishal",
-          title: "Art / UI",
-          work: "Map artwork support, UI components, portal visuals, finishing touches.",
-          img: "/team/Vishal.png",
-          grid: "lg:col-start-3 lg:col-span-2",
-          imgPos: "object-[center_20%]",
-        },
-        {
-          name: "Satish",
-          title: "Audio / Miscellaneous Items",
-          work: "Sound testing, ambience checks, mix/volume balancing.",
-          img: "/team/satishh.png",
-          grid: "lg:col-start-5 lg:col-span-2",
-          imgPos: "object-[center_20%]",
-        },
-      ].map((m) => (
-        <TeamCard key={m.name} m={m} />
-      ))}
-    </div>
-  </div>
-</Section>
+                  // BOTTOM ROW (3 cards evenly spaced)
+                  {
+                    name: "Roshni",
+                    title: "Art / UI",
+                    work: "Biome/map art, UI assets, dialogue visuals, polish pass.",
+                    img: "/team/roshni.jpeg",
+                    grid: "lg:col-start-1 lg:col-span-2",
+                    imgPos: "object-[center_20%]",
+                  },
+                  {
+                    name: "Vishal",
+                    title: "Art / UI",
+                    work: "Map artwork support, UI components, portal visuals, finishing touches.",
+                    img: "/team/Vishal.png",
+                    grid: "lg:col-start-3 lg:col-span-2",
+                    imgPos: "object-[center_20%]",
+                  },
+                  {
+                    name: "Satish",
+                    title: "Audio / Miscellaneous Items",
+                    work: "Sound testing, ambience checks, mix/volume balancing.",
+                    img: "/team/satishh.png",
+                    grid: "lg:col-start-5 lg:col-span-2",
+                    imgPos: "object-[center_20%]",
+                  },
+                ].map((m) => (
+                  <TeamCard key={m.name} m={m} />
+                ))}
+              </div>
+            </div>
+          </Section>
           <Section
             id="credits"
             title="Credits & Sources"
