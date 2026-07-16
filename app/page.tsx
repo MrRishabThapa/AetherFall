@@ -9,6 +9,7 @@ import {
   Map,
   Swords,
   Users,
+  Coins,
   ArrowDown,
 } from "lucide-react";
 
@@ -127,7 +128,7 @@ export default function Page() {
           >
             <ul className="list-disc pl-5 space-y-2">
               <li>
-                <span className="text-white">Goal:</span> complete hunts →
+                <span className="text-white">Goal:</span> Battle Mini bosses →
                 unlock portal → defeat abyss boss.
               </li>
               <li>
@@ -135,7 +136,7 @@ export default function Page() {
                 readable, fast to learn, satisfying loop.
               </li>
               <li>
-                <span className="text-white">Visual style:</span> large detailed
+                <span className="text-white">Visual style:</span> fitting size detailed
                 maps (sprite-based, not backdrops).
               </li>
             </ul>
@@ -148,10 +149,9 @@ export default function Page() {
           >
             <ol className="list-decimal pl-5 space-y-2">
               <li>Start at Base Camp</li>
-              <li>Talk to quest NPC → receive hunt mission</li>
-              <li>Travel across biomes to find animals</li>
-              <li>Back-attack to secure the kill (risk if seen)</li>
-              <li>Return trophy/body to camp → progress</li>
+              <li>Talk to quest NPC → receive boss mission</li>
+              <li>Travel across biomes to find mysterious creatures</li>
+              <li>Kill bosses to unlock portals → progress</li>
               <li>Enter dungeon → boss fight → win</li>
             </ol>
           </Section>
@@ -165,7 +165,7 @@ export default function Page() {
               <div>
                 <div className="text-white font-semibold">Base Camp</div>
                 <div>
-                  Static hub screen: NPC dialogue, mission turn-in, overworld
+                  Static hub screen: NPC cutscenes, mission turn-in, overworld
                   access.
                 </div>
               </div>
@@ -174,7 +174,7 @@ export default function Page() {
                   Overworld (3 Biomes)
                 </div>
                 <div>
-                  One big scrollable sprite map: Forest → Arctic → Desert
+                   big portal linked sprite map: Forest → Arctic → Desert
                   transitions.
                 </div>
                 <div className="mt-2 text-white/70">
@@ -198,20 +198,39 @@ export default function Page() {
           >
             <ul className="list-disc pl-5 space-y-2">
               <li>
-                <span className="text-white">Camera:</span> player centered,
-                world offsets with camX/camY.
+                <span className="text-white">Camera:</span> Screen centered , Player always visible, smooth follow, no zoom.
               </li>
               <li>
                 <span className="text-white">Dialogue:</span> pixel font
-                rendering, multi-page, Enter to advance.
+                rendering, multi-page
               </li>
               <li>
                 <span className="text-white">Missions:</span> progress tracking
                 (0/3 etc.), portal unlock after enough missions.
               </li>
               <li>
-                <span className="text-white">Hunting:</span> strike from behind;
-                danger if the target turns to face you.
+                <span className="text-white">Controls:</span> A W S D keys for movement, L for slicing sword
+              </li>
+            </ul>
+          </Section>
+          <Section
+            id="characters"
+            title="Characters"
+            icon={<Coins className="h-5 w-5 text-gild/90" />}
+          >
+            <ul className="list-disc pl-5 space-y-2">
+              <li>
+                Protagonist : Player-controlled, sword-wielding, can slice enemies
+              </li>
+              <li>
+                Forest Boss : Dryad , very energetic, spins a lot , butterfly kicks
+              </li>
+              <li>
+                Artic Boss : Prime Ape , Strong Bulky , moves slowly but has high health and attack damage
+              </li>
+             
+              <li>
+                Desert Boss : Corpse , Slithery , moves quickly and has high attack speed
               </li>
             </ul>
           </Section>
@@ -221,14 +240,9 @@ export default function Page() {
             title="Final Boss"
             icon={<Swords className="h-5 w-5 text-gild/90" />}
           >
-            <ul className="list-disc pl-5 space-y-2">
-              <li>
-                Clear patterns, readable arena, exhibition-friendly difficulty.
-              </li>
-              <li>
-                Boss HP bar + strong end-state feedback (win screen/credits).
-              </li>
-            </ul>
+            <div className="text-white/75">
+              ????????????????????
+            </div>
           </Section>
 
           <Section
