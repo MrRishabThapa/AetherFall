@@ -10,6 +10,7 @@ const nav = [
   { label: "World", href: "#world" },
   { label: "Mechanics", href: "#mechanics" },
   { label: "Boss", href: "#boss" },
+  { label: "Process", href: "#process" },
   { label: "Team", href: "#team" },
 ];
 

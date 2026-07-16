@@ -12,6 +12,8 @@ import {
   Coins,
   ArrowDown,
 } from "lucide-react";
+import { ProcessGallery, type ProcessItem } from "@/components/ProcessGallery";
+import { Images } from "lucide-react";
 
 function Section({
   id,
@@ -43,7 +45,22 @@ function Section({
     </section>
   );
 }
-
+const processItems: ProcessItem[] = [
+  { type: "image", src: "/process/01-map.jpg", title: "Early Map Sketch" },
+  {
+    type: "video",
+    src: "/process/02-camera.mp4",
+    poster: "/process/02-camera-poster.jpg",
+    title: "Camera Prototype (video)",
+  },
+  { type: "image", src: "/process/03-ui.png", title: "UI Iteration" },
+  {
+    type: "video",
+    src: "/process/04-boss.mp4",
+    poster: "/process/04-boss-poster.jpg",
+    title: "Boss Test (video)",
+  },
+];
 export default function Page() {
   const playbackRate = 0.7; // <- change this (0.5 = slower, 0.85 = slightly slower)
 
@@ -136,8 +153,8 @@ export default function Page() {
                 readable, fast to learn, satisfying loop.
               </li>
               <li>
-                <span className="text-white">Visual style:</span> fitting size detailed
-                maps (sprite-based, not backdrops).
+                <span className="text-white">Visual style:</span> fitting size
+                detailed maps (sprite-based, not backdrops).
               </li>
             </ul>
           </Section>
@@ -174,7 +191,7 @@ export default function Page() {
                   Overworld (3 Biomes)
                 </div>
                 <div>
-                   big portal linked sprite map: Forest → Arctic → Desert
+                  big portal linked sprite map: Forest → Arctic → Desert
                   transitions.
                 </div>
                 <div className="mt-2 text-white/70">
@@ -198,7 +215,8 @@ export default function Page() {
           >
             <ul className="list-disc pl-5 space-y-2">
               <li>
-                <span className="text-white">Camera:</span> Screen centered , Player always visible, smooth follow, no zoom.
+                <span className="text-white">Camera:</span> Screen centered ,
+                Player always visible, smooth follow, no zoom.
               </li>
               <li>
                 <span className="text-white">Dialogue:</span> pixel font
@@ -209,7 +227,8 @@ export default function Page() {
                 (0/3 etc.), portal unlock after enough missions.
               </li>
               <li>
-                <span className="text-white">Controls:</span> A W S D keys for movement, L for slicing sword
+                <span className="text-white">Controls:</span> A W S D keys for
+                movement, L for slicing sword
               </li>
             </ul>
           </Section>
@@ -220,17 +239,21 @@ export default function Page() {
           >
             <ul className="list-disc pl-5 space-y-2">
               <li>
-                Protagonist : Player-controlled, sword-wielding, can slice enemies
+                Protagonist : Player-controlled, sword-wielding, can slice
+                enemies
               </li>
               <li>
-                Forest Boss : Dryad , very energetic, spins a lot , butterfly kicks
+                Forest Boss : Dryad , very energetic, spins a lot , butterfly
+                kicks
               </li>
               <li>
-                Artic Boss : Prime Ape , Strong Bulky , moves slowly but has high health and attack damage
+                Artic Boss : Prime Ape , Strong Bulky , moves slowly but has
+                high health and attack damage
               </li>
-             
+
               <li>
-                Desert Boss : Corpse , Slithery , moves quickly and has high attack speed
+                Desert Boss : Corpse , Slithery , moves quickly and has high
+                attack speed
               </li>
             </ul>
           </Section>
@@ -240,11 +263,20 @@ export default function Page() {
             title="Final Boss"
             icon={<Swords className="h-5 w-5 text-gild/90" />}
           >
-            <div className="text-white/75">
-              ????????????????????
-            </div>
+            <div className="text-white/75">????????????????????</div>
           </Section>
+          <Section
+            id="process"
+            title="Process / Development Journey"
+            icon={<Images className="h-5 w-5 text-gild/90" />}
+          >
+            <div className="text-white/70">
+              Evidence of effort and iteration: sketches, failed attempts,
+              prototypes, and progress milestones.
+            </div>
 
+            <ProcessGallery items={processItems} previewCount={3} />
+          </Section>
           <Section
             id="team"
             title="Team"
