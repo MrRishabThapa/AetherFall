@@ -5,6 +5,7 @@ import { Navbar } from "@/components/Navbar";
 import { ScrollRail } from "@/components/ScrollRail";
 import { OrnatePanel } from "@/components/OrnatePanel";
 import { BadgeCheck, ExternalLink } from "lucide-react";
+import { WorldRoadmapCurved } from "@/components/WorldRoadmap";
 import {
   Crosshair,
   Footprints,
@@ -232,40 +233,42 @@ export default function Page() {
               <li>Enter dungeon → boss fight → win</li>
             </ol>
           </Section>
+          <Section
+            id="characters"
+            title="Characters"
+            icon={<Coins className="h-5 w-5 text-gild/90" />}
+          >
+            <ul className="list-disc pl-5 space-y-2">
+              <li>
+                Protagonist : Player-controlled, sword-wielding, can slice
+                enemies
+              </li>
+              <li>
+                Forest Boss : <b>DRYAD</b> ; very energetic, spins a lot ,
+                butterfly kicks
+              </li>
+              <li>
+                Artic Boss : <b>PRIME APE</b> ; Strong Bulky , moves slowly but
+                has high health and attack damage
+              </li>
 
+              <li>
+                Desert Boss : <b>CORPSE</b> ; Slithery , moves quickly and has
+                high attack speed
+              </li>
+            </ul>
+          </Section>
           <Section
             id="world"
             title="World / Map Structure"
             icon={<Map className="h-5 w-5 text-gild/90" />}
           >
-            <div className="space-y-4">
-              <div>
-                <div className="text-white font-semibold">Base Camp</div>
-                <div>
-                  Static hub screen: NPC cutscenes, mission turn-in, overworld
-                  access.
-                </div>
-              </div>
-              <div>
-                <div className="text-white font-semibold">
-                  Overworld (3 Biomes)
-                </div>
-                <div>
-                  big portal linked sprite map: Forest → Arctic → Desert
-                  transitions.
-                </div>
-                <div className="mt-2 text-white/70">
-                  Collision is <span className="text-white">border-only</span>{" "}
-                  around the full map for smooth exploration.
-                </div>
-              </div>
-              <div>
-                <div className="text-white font-semibold">Dungeon Arena</div>
-                <div>
-                  Single-screen abyss arena with only outer wall collision.
-                </div>
-              </div>
+            <div className="text-white/70">
+              Progression across biomes, ending in the Abyss arena. Hover a stop
+              to highlight the route up to that point.
             </div>
+
+            <WorldRoadmapCurved />
           </Section>
 
           <Section
@@ -289,31 +292,6 @@ export default function Page() {
               <li>
                 <span className="text-white">Controls:</span> A W S D keys for
                 movement, L for slicing sword
-              </li>
-            </ul>
-          </Section>
-          <Section
-            id="characters"
-            title="Characters"
-            icon={<Coins className="h-5 w-5 text-gild/90" />}
-          >
-            <ul className="list-disc pl-5 space-y-2">
-              <li>
-                Protagonist : Player-controlled, sword-wielding, can slice
-                enemies
-              </li>
-              <li>
-                Forest Boss : <b>DRYAD</b> ; very energetic, spins a lot , butterfly
-                kicks
-              </li>
-              <li>
-                Artic Boss : <b>PRIME APE</b> ; Strong Bulky , moves slowly but has
-                high health and attack damage
-              </li>
-
-              <li>
-                Desert Boss : <b>CORPSE</b> ; Slithery , moves quickly and has high
-                attack speed
               </li>
             </ul>
           </Section>
