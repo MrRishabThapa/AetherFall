@@ -63,6 +63,7 @@ const processItems: ProcessItem[] = [
 
   { type: "image", src: "/process/story.png", title: "Game UI concept" },
 { type: "image", src: "/process/generation.jpeg", title: "Game UI concept" },
+{ type: "image", src: "/process/layout.jpeg", title: "Game UI concept" },
   {
     type: "image",
     src: "/process/character-custom-design.png",
